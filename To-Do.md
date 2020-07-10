@@ -1,11 +1,11 @@
 1. Asset Collection/Creation
   a. Background
-  b. Walls
-  c. Platform
-  d. Destroyable plats
+  b. Walls : https://m039.itch.io/blue-space-cave-tileset
+  c. Platform : https://m039.itch.io/blue-space-cave-tileset
+  d. Destroyable plats : https://m039.itch.io/blue-space-cave-tileset
   e. Player
   f. Attack
-  g. Enemies (2 types at least)
+  g. Enemies (2 types at least) : https://0x72.itch.io/dungeontileset-ii
   
 2. Stage 1
   a. Player controls
