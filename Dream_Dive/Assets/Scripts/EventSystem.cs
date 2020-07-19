@@ -25,4 +25,11 @@ public class EventSystem : MonoBehaviour
             onPlayerDeath();
         }
     }
+
+    public event Action onPlayerDamage;
+    public void PlayerDamage(){
+        if(onPlayerDamage != null){
+            onPlayerDamage();
+        }
+    }
 }

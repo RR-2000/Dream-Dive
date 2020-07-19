@@ -9,14 +9,24 @@ public class Player: MonoBehaviour
     private Transform _T;
     private bool isGrounded = true;
     private bool isMoving = false;
-    private int _health =  4;
 
+    public int _health =  4;
     public GameObject _FB;
     public float runSpeed = 10.0f;
     public int no_att_max = 10;
     public int no_att;
     public float jump_vel = 7.0f;
 
+    public static Player player;
+
+    void Awake()
+    {
+        player = this;
+    }
+
+    public float getY(){
+      return _T.position.y;
+    }
     void Start()
     {
         _RB = gameObject.GetComponent<Rigidbody2D>();
@@ -68,6 +78,8 @@ public class Player: MonoBehaviour
 
       if(col.gameObject.tag == "Enemy"){
         _health--;
+        col.gameObject.GetComponent<Enemy>()._health -= 5;
+        EventSystem.current.PlayerDamage();
       }
     }
 

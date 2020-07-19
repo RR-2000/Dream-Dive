@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    private Transform _T;
+
     public float attack_speed = 8.0f;
     public float damage = 5;
     void Start()
     {
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -attack_speed, 0);
+        _T = gameObject.GetComponent<Transform>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-
+      if(_T.position.y < Player.player.getY() - 10){
+        Destroy(gameObject);
+      }
     }
 
 
