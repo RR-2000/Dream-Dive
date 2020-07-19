@@ -9,16 +9,33 @@ public class Player: MonoBehaviour
     private Transform _T;
     private bool isGrounded = true;
     private bool isMoving = false;
+    private int _health =  4;
 
+    public GameObject _FB;
     public float runSpeed = 10.0f;
+    public int no_att_max = 10;
+    public int no_att;
+    public float jump_vel = 7.0f;
+
     void Start()
     {
         _RB = gameObject.GetComponent<Rigidbody2D>();
         _T = gameObject.GetComponent<Transform>();
         _anim = gameObject.GetComponent<Animator>();
+        no_att = no_att_max;
+        EventSystem.current.onEnemyKill += OnEnemyKill;
     }
 
-    // Update is called once per frame
+    void Update(){
+      if(Input.GetKeyDown("space")){
+        Jump();
+      }
+      if(_health <= 0){
+        EventSystem.current.PlayerDeath();
+        Destroy(gameObject);
+      }
+    }
+
     void FixedUpdate()
     {
       isMoving = true;
@@ -40,6 +57,7 @@ public class Player: MonoBehaviour
       if(col.gameObject.tag == "Ground"){
         isGrounded = false;
       }
+
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -47,5 +65,23 @@ public class Player: MonoBehaviour
       if(col.gameObject.tag == "Ground"){
         isGrounded = true;
       }
+
+      if(col.gameObject.tag == "Enemy"){
+        _health--;
+      }
+    }
+
+    public void Jump(){
+      if(isGrounded){
+        _RB.velocity = new Vector3(_RB.velocity.x, jump_vel, 0);
+      }else if(no_att > 0){
+        _RB.velocity = new Vector3(_RB.velocity.x, jump_vel, 0);
+        Instantiate(_FB, new Vector3(_T.position.x, _T.position.y, _T.position.z), _FB.transform.rotation);
+        no_att--;
+      }
+    }
+
+    public void OnEnemyKill(){
+      no_att = no_att_max;
     }
 }
