@@ -48,15 +48,22 @@ public class Player: MonoBehaviour
 
     void FixedUpdate()
     {
+
+      move(Input.GetAxis("Horizontal"));
+
+    }
+
+    public void move(float inp)
+    {
       isMoving = true;
-      if(Input.GetAxis("Horizontal") > 0){
+      if(inp > 0){
         _T.localScale = new Vector3(2.5f, 2.5f, 1f);
-      }else if(Input.GetAxis("Horizontal") < 0){
+      }else if(inp < 0){
         _T.localScale = new Vector3(-2.5f, 2.5f, 1f);
       }else{
         isMoving = false;
       }
-      _T.position += new Vector3((Time.deltaTime*runSpeed*Input.GetAxis("Horizontal") ), 0, 0);
+      _T.position += new Vector3((Time.deltaTime*runSpeed*inp ), 0, 0);
 
       _anim.SetBool("Grounded", isGrounded);
       _anim.SetBool("Moving", isMoving);
