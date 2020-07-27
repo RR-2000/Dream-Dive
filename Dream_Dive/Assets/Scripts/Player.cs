@@ -9,6 +9,7 @@ public class Player: MonoBehaviour
     private Transform _T;
     private bool isGrounded = true;
     private bool isMoving = false;
+    private Gyroscope m_inpt;
 
     public int _health =  4;
     public GameObject _FB;
@@ -24,14 +25,13 @@ public class Player: MonoBehaviour
         player = this;
     }
 
-    public float getY(){
-      return _T.position.y;
-    }
     void Start()
     {
         _RB = gameObject.GetComponent<Rigidbody2D>();
         _T = gameObject.GetComponent<Transform>();
         _anim = gameObject.GetComponent<Animator>();
+        m_inpt = Input.gyro;
+        m_inpt.enabled = true;
         no_att = no_att_max;
         EventSystem.current.onEnemyKill += OnEnemyKill;
     }
@@ -50,7 +50,7 @@ public class Player: MonoBehaviour
     {
 
       move(Input.GetAxis("Horizontal"));
-
+      move(m_inpt.rotationRate.y);
     }
 
     public void move(float inp)
@@ -102,5 +102,9 @@ public class Player: MonoBehaviour
 
     public void OnEnemyKill(){
       no_att = no_att_max;
+    }
+
+    public float getY(){
+      return _T.position.y;
     }
 }

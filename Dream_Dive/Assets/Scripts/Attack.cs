@@ -17,7 +17,8 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(_T.position.y < Player.player.getY() - 10){
+
+      if(Player.player == null || _T.position.y < Player.player.getY() - 10){
         Destroy(gameObject);
       }
     }

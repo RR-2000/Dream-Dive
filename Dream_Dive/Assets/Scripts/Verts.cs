@@ -14,7 +14,7 @@ public class Verts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(_T.position.y > Player.player.getY() + 15){
+      if(Player.player == null || _T.position.y > Player.player.getY() + 15){
         Destroy(gameObject);
       }
     }

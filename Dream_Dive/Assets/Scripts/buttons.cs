@@ -15,7 +15,9 @@ public class buttons : MonoBehaviour
         if(_left == false && _right == false){
           mv = 0;
         }
-        Player.player.move(mv);
+        if(Player.player != null){
+          Player.player.move(mv);
+        }
     }
 
     public void right_dw(){
