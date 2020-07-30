@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,7 +47,7 @@ public class Player: MonoBehaviour
     {
 
       move(Input.GetAxis("Horizontal"));
-      move(Input.acceleration.y);
+      move(Input.acceleration.x*3);
     }
 
     public void move(float inp)
