@@ -58,7 +58,7 @@ public class Player: MonoBehaviour
     {
 
       move(Input.GetAxis("Horizontal"));
-      if(Input.acceleration.x > 0.5){
+      if(Input.acceleration.x > 0.1 || Input.acceleration.x < -0.1){
         move(Input.acceleration.x*3);
       }
     }
