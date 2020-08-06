@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class health_FB_Text : MonoBehaviour
+public class Score : MonoBehaviour
 {
-    public Text tx;
-    public Text Score;
+    public Text sc;
 
     private int score = 0;
+    private float timeUP = 0;
+    private int score_mult = 0;
 
     void Start(){
       EventSystem.current.onEnemyKill += score_up;
       EventSystem.current.onPlayerDeath += score_disp;
+      EventSystem.current.onPlayerSpawn += setMult;
     }
 
-    void Update()
-    {
-      tx.text = "Health: " + Player.player._health.ToString() + " Fire Balls: " + Player.player.no_att.ToString();
+    void setMult(){
+      score_mult = 1;
     }
-
     void score_up(){
-      score++;
+      score += score_mult;
     }
 
     void score_disp(){
-      Score.text = "Score: " + score.ToString();
+      sc.text = "Score: " + score.ToString();
     }
 }

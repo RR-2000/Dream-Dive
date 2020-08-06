@@ -7,12 +7,17 @@ public class GameController : MonoBehaviour
     public GameObject[] list;
     public int no_of_verts = 1;
     private float current_Vert;
+    public GameObject GOText;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
       current_Vert = 0;
+      EventSystem.current.onPlayerDeath += gameOver;
     }
 
+    void gameOver(){
+      GOText.SetActive(true);
+    }
     // Update is called once per frame
     void Update()
     {

@@ -5,12 +5,11 @@ using UnityEngine;
 public class Cam_movement : MonoBehaviour
 {
     public Transform _T, Player_T;
-    void Start()
-    {
 
+    void OnEnable(){
+      Player_T = Player.player.transform;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if(Player_T == null){

@@ -7,7 +7,7 @@ public class Player: MonoBehaviour
     private Animator _anim;
     private Rigidbody2D _RB;
     private Transform _T;
-    private bool isGrounded = true;
+    private bool isGrounded = false;
     private bool isMoving = false;
     private SpriteRenderer  _SR;
     private Color nrml_color = new Color(1,1,1,1);
@@ -58,7 +58,9 @@ public class Player: MonoBehaviour
     {
 
       move(Input.GetAxis("Horizontal"));
-      move(Input.acceleration.x*3);
+      if(Input.acceleration.x > 0.5){
+        move(Input.acceleration.x*3);
+      }
     }
 
     public void move(float inp)

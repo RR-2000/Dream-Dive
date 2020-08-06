@@ -10,10 +10,15 @@ public class Health_Bar : MonoBehaviour
     void Start()
     {
       EventSystem.current.onPlayerDamage += health_update;
+      EventSystem.current.onPlayerDeath += health_update;
     }
 
     void health_update()
     {
-      GetComponent<Image>().sprite = li[Player.player.getHealth()];
+      if(Player.player.getHealth() <= 0){
+        GetComponent<Image>().sprite = li[0];
+      }else{
+        GetComponent<Image>().sprite = li[Player.player.getHealth()];
+      }
     }
 }
