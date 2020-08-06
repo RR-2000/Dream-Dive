@@ -9,6 +9,9 @@ public class Player: MonoBehaviour
     private Transform _T;
     private bool isGrounded = true;
     private bool isMoving = false;
+    private SpriteRenderer  _SR;
+    private Color nrml_color = new Color(1,1,1,1);
+    private Color dmg_color = new Color(1,0,0,0.75f);
 
     public int _health =  4;
     public GameObject _FB;
@@ -16,6 +19,7 @@ public class Player: MonoBehaviour
     public int no_att_max = 10;
     public int no_att;
     public float jump_vel = 7.0f;
+    public float dmg_color_speed = 10f;
 
     public static Player player;
 
@@ -29,8 +33,10 @@ public class Player: MonoBehaviour
         _RB = gameObject.GetComponent<Rigidbody2D>();
         _T = gameObject.GetComponent<Transform>();
         _anim = gameObject.GetComponent<Animator>();
+        _SR = gameObject.GetComponent<SpriteRenderer>();
         no_att = no_att_max;
         EventSystem.current.onEnemyKill += OnEnemyKill;
+        EventSystem.current.onPlayerDamage += onDamage;
     }
 
     public int getHealth(){
@@ -45,6 +51,7 @@ public class Player: MonoBehaviour
         EventSystem.current.PlayerDeath();
         Destroy(gameObject);
       }
+      _SR.color = Color.Lerp(_SR.color, nrml_color, dmg_color_speed * Time.deltaTime);
     }
 
     void FixedUpdate()
@@ -89,7 +96,6 @@ public class Player: MonoBehaviour
       if(col.collider.tag == "Enemy_Head"){
         col.gameObject.GetComponentInParent<Enemy>()._health -= 5;
         if(col.gameObject.GetComponentInParent<Enemy>().jump_dmg){
-          _health--;
           EventSystem.current.PlayerDamage();
         }
         _RB.velocity = new Vector3(_RB.velocity.x, jump_vel, 0);
@@ -97,7 +103,6 @@ public class Player: MonoBehaviour
       }
 
       if(col.gameObject.tag == "Enemy"){
-        _health--;
         col.gameObject.GetComponent<Enemy>()._health -= 5;
         EventSystem.current.PlayerDamage();
       }
@@ -119,5 +124,10 @@ public class Player: MonoBehaviour
 
     public float getY(){
       return _T.position.y;
+    }
+
+    public void onDamage(){
+      _health--;
+      _SR.color = dmg_color;
     }
 }
