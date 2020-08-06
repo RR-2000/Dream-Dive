@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     private bool colFlag = true;
     public float _speed = 2f;
     public float _health = 10f;
+    public bool jump_dmg = false;
     void Start()
     {
         _RB = gameObject.GetComponent<Rigidbody2D>();

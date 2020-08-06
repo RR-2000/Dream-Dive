@@ -633,12 +633,12 @@ TextureImporter:
       name: Space Cave Tileset_21
       rect:
         serializedVersion: 2
-        x: 53
-        y: 147
-        width: 23
-        height: 25
+        x: 56
+        y: 150
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

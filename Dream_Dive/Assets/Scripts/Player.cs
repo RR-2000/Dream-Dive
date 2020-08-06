@@ -33,6 +33,10 @@ public class Player: MonoBehaviour
         EventSystem.current.onEnemyKill += OnEnemyKill;
     }
 
+    public int getHealth(){
+      return _health;
+    }
+
     void Update(){
       if(Input.GetKeyDown("space")){
         Jump();
@@ -78,6 +82,18 @@ public class Player: MonoBehaviour
     {
       if(col.gameObject.tag == "Ground"){
         isGrounded = true;
+      }
+
+
+
+      if(col.collider.tag == "Enemy_Head"){
+        col.gameObject.GetComponentInParent<Enemy>()._health -= 5;
+        if(col.gameObject.GetComponentInParent<Enemy>().jump_dmg){
+          _health--;
+          EventSystem.current.PlayerDamage();
+        }
+        _RB.velocity = new Vector3(_RB.velocity.x, jump_vel, 0);
+        return;
       }
 
       if(col.gameObject.tag == "Enemy"){
