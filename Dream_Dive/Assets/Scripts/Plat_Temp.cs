@@ -22,4 +22,11 @@ public class Plat_Temp : MonoBehaviour
         Destroy(gameObject);
       }
     }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+      if(col.gameObject.tag == "Player"){
+        Destroy(gameObject);
+      }
+    }
 }

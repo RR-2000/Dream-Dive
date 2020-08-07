@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public float _speed = 2f;
     public float _health = 10f;
     public bool jump_dmg = false;
+    public bool Grounded =  false;
+
     void Start()
     {
         _RB = gameObject.GetComponent<Rigidbody2D>();
@@ -24,11 +26,17 @@ public class Enemy : MonoBehaviour
         EventSystem.current.EnemyKill();
         Destroy(gameObject);
       }
+      if(Grounded && _T.position.y < Player.player.getY() - 30){
+        Destroy(gameObject);
+      }
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-      if(colFlag == true){
+      if(col.gameObject.tag == "Ground"){
+        return;
+      }
+      if(colFlag == true ){
         _RB.velocity = new Vector3(-_speed, 0, 0);
         _speed *= -1;
         _T.localScale = new Vector3(-_T.localScale.x, _T.localScale.y, _T.localScale.z);
@@ -37,6 +45,10 @@ public class Enemy : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D col)
     {
+      if(col.gameObject.tag == "Ground"){
+        return;
+      }
+      
       if(col.gameObject.tag == "Attack"){
 
       }else{
