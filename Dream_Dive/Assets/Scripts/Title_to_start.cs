@@ -10,7 +10,7 @@ public class Title_to_start : MonoBehaviour
     public GameObject plyr;
 
     public void BEGIN(){
-      Instantiate(plyr, new Vector3(0, 8, 0), Quaternion.identity);
+      plyr.SetActive(true);
       EventSystem.current.PlayerSpawn();
       camMove.enabled = true;
       gameController.enabled = true;

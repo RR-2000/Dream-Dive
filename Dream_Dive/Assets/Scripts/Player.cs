@@ -12,6 +12,7 @@ public class Player: MonoBehaviour
     private SpriteRenderer  _SR;
     private Color nrml_color = new Color(1,1,1,1);
     private Color dmg_color = new Color(1,0,0,0.75f);
+    private TrailRenderer _TR;
 
     public int _health =  4;
     public GameObject _FB;
@@ -34,14 +35,13 @@ public class Player: MonoBehaviour
         _T = gameObject.GetComponent<Transform>();
         _anim = gameObject.GetComponent<Animator>();
         _SR = gameObject.GetComponent<SpriteRenderer>();
+        _TR = gameObject.GetComponent<TrailRenderer>();
         no_att = no_att_max;
         EventSystem.current.onEnemyKill += OnEnemyKill;
         EventSystem.current.onPlayerDamage += onDamage;
     }
 
-    public int getHealth(){
-      return _health;
-    }
+
 
     void Update(){
       if(Input.GetKeyDown("space")){
@@ -61,6 +61,7 @@ public class Player: MonoBehaviour
       if(Input.acceleration.x > 0.1 || Input.acceleration.x < -0.1){
         move(Input.acceleration.x*3);
       }
+      _RB.velocity = new Vector3(0,_RB.velocity.y, 0);
     }
 
     public void move(float inp)
@@ -83,6 +84,7 @@ public class Player: MonoBehaviour
     {
       if(col.gameObject.tag == "Ground"){
         isGrounded = false;
+        _TR.enabled = true;
       }
 
     }
@@ -91,6 +93,7 @@ public class Player: MonoBehaviour
     {
       if(col.gameObject.tag == "Ground"){
         isGrounded = true;
+        _TR.enabled = false;
       }
 
 
@@ -121,7 +124,10 @@ public class Player: MonoBehaviour
     }
 
     public void OnEnemyKill(){
-      no_att = no_att_max;
+      no_att += 2;
+      if(no_att > no_att_max){
+        no_att = no_att_max;
+      }
     }
 
     public float getY(){
@@ -131,5 +137,17 @@ public class Player: MonoBehaviour
     public void onDamage(){
       _health--;
       _SR.color = dmg_color;
+    }
+
+    public int getHealth(){
+      return _health;
+    }
+
+    public bool getGrounded(){
+      return isGrounded;
+    }
+
+    public void setTrailStart(Color clr){
+      _TR.startColor = clr;
     }
 }
