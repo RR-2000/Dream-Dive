@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-      if(col.gameObject.tag == "Ground"){
+      if(Grounded && col.gameObject.tag == "Ground"){
         return;
       }
       if(colFlag == true ){
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D col)
     {
-      if(col.gameObject.tag == "Ground"){
+      if(Grounded && col.gameObject.tag == "Ground"){
         return;
       }
 
