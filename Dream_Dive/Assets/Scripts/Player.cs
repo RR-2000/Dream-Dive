@@ -13,6 +13,7 @@ public class Player: MonoBehaviour
     private Color nrml_color = new Color(1,1,1,1);
     private Color dmg_color = new Color(1,0,0,0.75f);
     private TrailRenderer _TR;
+    private int num_ground = 0;
 
     public int _health =  4;
     public GameObject _FB;
@@ -35,13 +36,15 @@ public class Player: MonoBehaviour
         _T = gameObject.GetComponent<Transform>();
         _anim = gameObject.GetComponent<Animator>();
         _SR = gameObject.GetComponent<SpriteRenderer>();
-        _TR = gameObject.GetComponent<TrailRenderer>();
+
         no_att = no_att_max;
         EventSystem.current.onEnemyKill += OnEnemyKill;
         EventSystem.current.onPlayerDamage += onDamage;
     }
 
-
+    void OnEnable(){
+      _TR = gameObject.GetComponent<TrailRenderer>();
+    }
 
     void Update(){
       if(Input.GetKeyDown("space")){
@@ -83,7 +86,10 @@ public class Player: MonoBehaviour
     private void OnCollisionExit2D(Collision2D col)
     {
       if(col.gameObject.tag == "Ground"){
-        isGrounded = false;
+        num_ground--;
+        if(num_ground == 0){
+          isGrounded = false;
+        }
         _TR.enabled = true;
       }
 
@@ -92,6 +98,7 @@ public class Player: MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
       if(col.gameObject.tag == "Ground"){
+        num_ground++;
         isGrounded = true;
         _TR.enabled = false;
       }

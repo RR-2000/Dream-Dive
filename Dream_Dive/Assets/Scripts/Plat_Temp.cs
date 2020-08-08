@@ -23,10 +23,11 @@ public class Plat_Temp : MonoBehaviour
       }
     }
 
-    void OnTriggerExit2D(Collider2D col)
+    private void OnCollisionExit2D(Collision2D col)
     {
       if(col.gameObject.tag == "Player"){
         Destroy(gameObject);
       }
+
     }
 }

@@ -32,7 +32,7 @@ public class Attack : MonoBehaviour
       if(col.gameObject.tag == "Enemy_Head"){
         col.gameObject.transform.parent.gameObject.GetComponent<Enemy>()._health -= damage;
       }
-      if(col.gameObject.tag != "Player"){
+      if(col.gameObject.tag != "Player" && col.gameObject.tag != "Wall"){
         Destroy(gameObject);
       }
     }

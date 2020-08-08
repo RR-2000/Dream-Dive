@@ -31,6 +31,11 @@ public class Enemy : MonoBehaviour
       }
     }
 
+    void FixedUpdate(){
+      if(Grounded){
+        _RB.velocity = new Vector3(_speed, _RB.velocity.y, 0);
+      }
+    }
     void OnCollisionEnter2D(Collision2D col)
     {
       if(col.gameObject.tag == "Ground"){
@@ -48,7 +53,7 @@ public class Enemy : MonoBehaviour
       if(col.gameObject.tag == "Ground"){
         return;
       }
-      
+
       if(col.gameObject.tag == "Attack"){
 
       }else{
