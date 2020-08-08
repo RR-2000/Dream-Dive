@@ -26,6 +26,9 @@ public class Enemy : MonoBehaviour
         EventSystem.current.EnemyKill();
         Destroy(gameObject);
       }
+      if(Player.player == null){
+        return;
+      }
       if(Grounded && _T.position.y < Player.player.getY() - 30){
         Destroy(gameObject);
       }

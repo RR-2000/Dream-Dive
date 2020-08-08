@@ -1103,7 +1103,9 @@ MonoBehaviour:
   - {fileID: 7995481216166577888, guid: d0f04ff246b59524aa13342a0f1d97f0, type: 3}
   - {fileID: 3272316298971087691, guid: 7a73bfe0d3d0dba4fb17f3fe8c29cf56, type: 3}
   - {fileID: 6015444090621054980, guid: e1acd6a33d8c21a44937e849d99968ac, type: 3}
-  no_of_verts: 4
+  - {fileID: 988329869826532704, guid: 08cd4fc8eb808924b92afec0c16d2ff1, type: 3}
+  - {fileID: 988329869826532704, guid: 08cd4fc8eb808924b92afec0c16d2ff1, type: 3}
+  no_of_verts: 6
   GOText: {fileID: 1772593140}
 --- !u!1 &588798432
 GameObject:
